@@ -1,16 +1,68 @@
-object gimenez {
-	var sueldo = 15000
+object galvan{
+	var  sueldo = 15000
+	var saldo = 0
 	
-	method sueldo() = sueldo
-	
-	method sueldo(_sueldo) { sueldo = _sueldo }
+	method sueldo (_sueldo){
+		sueldo = _sueldo
+	}
+	method sueldo(){
+		return sueldo
+	}
+	method cobrarSueldo(){
+		saldo += self.sueldo ()
+	}
+	method gastar(cuanto){
+		saldo -= cuanto
+	}
+	method totalDinero(){
+		return if(saldo > 0){
+			saldo
+		} else{
+			0
+		} 
+	}
+	method totalDeuda(){
+		return if(saldo < 0){
+			saldo.abs()
+		} else{
+			0
+		} 
+	}
 }
+object baigorria{
+	var empanadasVendidas = 0
+	const empanada = 15
 
-object baigorria {
-	var cantidadEmpanadasVendidas = 100
-	var montoPorEmpanada = 15
+//2	
+	var totalCobrado = 0
 	
-	method venderEmpanada() { cantidadEmpanadasVendidas += 1 }
- 	
-	method sueldo() = cantidadEmpanadasVendidas * montoPorEmpanada
+	method empanadasVendidas (_empanadasVendidas){
+		empanadasVendidas += _empanadasVendidas
+		
+	}
+	method sueldo () {
+		return empanada * empanadasVendidas 
+	}
+//2	
+	method cobrarSueldo(){
+		totalCobrado += self.sueldo()
+		empanadasVendidas = 0
+	}
+	
+	method totalCobrado(){
+		return totalCobrado
+	}
+
+}
+object gimenez {
+	var fondo = 300000
+	
+//2
+	method pagarA(empleado) {
+    	fondo -= empleado.sueldo()
+   		 empleado.cobrarSueldo()
+	}
+	method fondo(){
+		return fondo
+	}
 }
